@@ -9,7 +9,7 @@ function HomeScreen() {
   
   useEffect(() => {
     async function getBooks() {
-      const { data } = await axios.get(" http://127.0.0.1:8000/api/books/");
+      const { data } = await axios.get("http://127.0.0.1:8000/api/books/");
       setBooks(data);
     };
     getBooks()

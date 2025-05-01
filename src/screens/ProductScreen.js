@@ -1,13 +1,22 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import { NavLink, Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap';
 import BookScreen from '../components/Rating';
 import books from '../books';
 import { useParams, Link } from 'react-router-dom';
 import Rating from '../components/Rating';
+import axios from 'axios';
 
 function ProductScreen() {
+    const [book, setBook] = useState({});
     const {id} = useParams();
-    const book = books.find(b => b._id === Number(id));
+    // const book = books.find(b => b._id === Number(id));
+    useEffect(() => {
+        async function getBook() {
+            const { data } = await axios.get(`http://127.0.0.1:8000/books/${id}/`);
+            setBook(data);
+        };
+        getBook();
+    }, [id])
   return (
     <div>
       <Link to="/" className="btn btn-light my-3">Go Back</Link>
